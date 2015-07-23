@@ -58,6 +58,7 @@
     <junit.version>4.12</junit.version>
     <mockito.version>1.9.5</mockito.version>
     <reflections.version>0.9.10</reflections.version>
+    <test-jetty-servlet.version>8.1.10.v20130312</test-jetty-servlet.version>
   </properties>
 
   <build>
@@ -69,10 +70,7 @@
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
-            <excludes>
-                <exclude>org.eclipse.jetty:jetty-servlet:9.2.9.v20150224</exclude>
-                <exclude>org.eclipse.jetty:jetty-http:9.2.9.v20150224</exclude>
-            </excludes>
+
         </configuration>
       </plugin>
       <!--
@@ -153,6 +151,12 @@
       <artifactId>mockito-core</artifactId>
       <version>${mockito.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>test-jetty-servlet</artifactId>
+        <version>${test-jetty-servlet.version}</version>
+        <scope>test</scope>
     </dependency>
   </dependencies>
 </project>
