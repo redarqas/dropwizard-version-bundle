@@ -8,7 +8,7 @@
     <version>9</version>
   </parent>
 
-  <groupId>io.dropwizard-bundles</groupId>
+  <groupId>fr.novapost.dropwizard-bundles</groupId>
   <artifactId>dropwizard-version-bundle</artifactId>
   <!-- Make sure to keep this in sync with the dropwizard version below. -->
   <version>0.8.2-1-SNAPSHOT</version>
