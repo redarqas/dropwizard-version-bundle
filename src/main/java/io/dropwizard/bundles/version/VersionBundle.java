@@ -60,8 +60,6 @@ public class VersionBundle implements Bundle {
     public void run(Environment environment) {
         VersionServlet servlet = new VersionServlet(supplier, new ObjectMapper());
         environment.addServlet(servlet, url);
-        //VersionServlet servlet = new VersionServlet(supplier, environment.getObjectMapper());
-        //environment.servlets().addServlet("version", servlet).addMapping(url);
-        //environment.admin().addServlet("version", servlet).addMapping(url);
+
     }
 }
