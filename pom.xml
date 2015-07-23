@@ -11,7 +11,7 @@
   <groupId>io.dropwizard-bundles</groupId>
   <artifactId>dropwizard-version-bundle</artifactId>
   <!-- Make sure to keep this in sync with the dropwizard version below. -->
-  <version>0.8.2-1-SNAPSHOT</version>
+  <version>0.6.2-1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>dropwizard-version-bundle</name>
@@ -54,7 +54,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <dropwizard.version>0.8.2</dropwizard.version>
+    <dropwizard.version>0.6.2</dropwizard.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.9.5</mockito.version>
     <reflections.version>0.9.10</reflections.version>
@@ -69,6 +69,10 @@
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
+            <excludes>
+                <exclude>org.eclipse.jetty:jetty-servlet:9.2.9.v20150224</exclude>
+                <exclude>org.eclipse.jetty:jetty-http:9.2.9.v20150224</exclude>
+            </excludes>
         </configuration>
       </plugin>
       <!--
@@ -117,12 +121,12 @@
   <dependencies>
     <!-- Dropwizard -->
     <dependency>
-      <groupId>io.dropwizard</groupId>
+      <groupId>com.yammer.dropwizard</groupId>
       <artifactId>dropwizard-core</artifactId>
       <version>${dropwizard.version}</version>
     </dependency>
     <dependency>
-      <groupId>io.dropwizard</groupId>
+      <groupId>com.yammer.dropwizard</groupId>
       <artifactId>dropwizard-testing</artifactId>
       <version>${dropwizard.version}</version>
       <scope>test</scope>

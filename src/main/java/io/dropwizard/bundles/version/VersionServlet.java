@@ -3,7 +3,7 @@ package io.dropwizard.bundles.version;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
 import com.google.common.io.Closeables;
-import io.dropwizard.jackson.Jackson;
+
 import java.io.IOException;
 import java.util.Map;
 import javax.servlet.ServletOutputStream;

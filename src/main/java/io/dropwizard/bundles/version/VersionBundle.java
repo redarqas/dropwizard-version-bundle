@@ -1,10 +1,12 @@
 package io.dropwizard.bundles.version;
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yammer.dropwizard.Bundle;
+import com.yammer.dropwizard.config.Bootstrap;
+import com.yammer.dropwizard.config.Environment;
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import io.dropwizard.Bundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
 
 /**
  * A Dropwizard bundle that will expose a version number of the application via
@@ -56,8 +58,10 @@ public class VersionBundle implements Bundle {
 
     @Override
     public void run(Environment environment) {
-        VersionServlet servlet = new VersionServlet(supplier, environment.getObjectMapper());
-        environment.servlets().addServlet("version", servlet).addMapping(url);
-        environment.admin().addServlet("version", servlet).addMapping(url);
+        VersionServlet servlet = new VersionServlet(supplier, new ObjectMapper());
+        environment.addServlet(servlet, url);
+        //VersionServlet servlet = new VersionServlet(supplier, environment.getObjectMapper());
+        //environment.servlets().addServlet("version", servlet).addMapping(url);
+        //environment.admin().addServlet("version", servlet).addMapping(url);
     }
 }
