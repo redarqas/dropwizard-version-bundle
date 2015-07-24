@@ -3,6 +3,7 @@ package io.dropwizard.bundles.version.suppliers;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteSource;
 import com.google.common.io.Resources;
+import io.dropwizard.bundles.version.NamedVersion;
 import io.dropwizard.bundles.version.VersionSupplier;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,8 +31,8 @@ public class MavenVersionSupplier implements VersionSupplier {
   private static final Logger LOG = LoggerFactory.getLogger(MavenVersionSupplier.class);
   private static final Pattern POM_PROPERTIES = Pattern.compile("pom\\.properties");
 
-  private final String version;
-  private final SortedMap<String, String> dependencyVersions = Maps.newTreeMap();
+  private final NamedVersion namedVersion;
+  private final SortedMap<String, NamedVersion> dependencyVersions = Maps.newTreeMap();
 
   /**
    * Construct a MavenVersionSupplier that uses the specified group and artifact as the main
@@ -51,21 +52,31 @@ public class MavenVersionSupplier implements VersionSupplier {
 
       // Use maven style keys for artifacts "<groupId>:<artifactId>".
       String key = String.format("%s:%s", artifact.getGroupId(), artifact.getArtifactId());
-      dependencyVersions.put(key, artifact.getVersion());
+      NamedVersion namedVersion = new NamedVersion(artifact.getVersion(), artifact.getArtifactId());
+      dependencyVersions.put(key, namedVersion);
     }
 
     String key = String.format("%s:%s", mainArtifactGroupId, mainArtifactId);
-    version = dependencyVersions.get(key);
+    namedVersion = dependencyVersions.get(key);
   }
+   @Override
+   public String getApplicationName() {
+     return namedVersion.name;
+   }
+
 
   @Override
   public String getApplicationVersion() {
-    return version;
+    return namedVersion.version;
   }
 
   @Override
   public Map<String, String> getDependencyVersions() {
-    return dependencyVersions;
+   SortedMap<String, String> result = Maps.newTreeMap();
+    for (NamedVersion nv : dependencyVersions.values()) {
+        result.put(nv.name, nv.version);
+    }
+    return result;
   }
 
   /**

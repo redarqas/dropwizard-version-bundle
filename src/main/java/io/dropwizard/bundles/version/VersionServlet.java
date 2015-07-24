@@ -34,22 +34,30 @@ import static com.google.common.base.Preconditions.checkNotNull;
 class VersionServlet extends HttpServlet {
   private final VersionSupplier supplier;
   private final ObjectMapper objectMapper;
-
-  VersionServlet(VersionSupplier supplier, ObjectMapper objectMapper) {
+  private final Boolean isAdmin;
+  VersionServlet(VersionSupplier supplier, ObjectMapper objectMapper, Boolean isAdmin) {
     this.supplier = checkNotNull(supplier);
     this.objectMapper = checkNotNull(objectMapper);
+    this.isAdmin = isAdmin;
   }
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String applicationVersion;
+    String applicationName;
+    Map<String, Object> response = Maps.newHashMap();
     try {
       applicationVersion = supplier.getApplicationVersion();
+      applicationName = supplier.getApplicationName();
     } catch (Throwable t) {
       resp.sendError(500, "Unable to determine application version.");
       return;
     }
 
+    response.put("version", applicationVersion);
+    response.put("name", applicationName);
+
+  if(isAdmin) {
     Map<String, String> dependencyVersions;
     try {
       dependencyVersions = supplier.getDependencyVersions();
@@ -57,10 +65,8 @@ class VersionServlet extends HttpServlet {
       resp.sendError(500, "Unable to determine dependency versions.");
       return;
     }
-
-    Map<String, Object> response = Maps.newHashMap();
-    response.put("application", applicationVersion);
     response.put("dependencies", dependencyVersions);
+  }
 
     // At this point we've collected all of the data we need, we know the result will be a success.
     resp.setStatus(200);
