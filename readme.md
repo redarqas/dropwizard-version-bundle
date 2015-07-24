@@ -11,13 +11,25 @@ dependencies via the admin port.
 
 Just add this maven dependency to get started:
 
+In your pom.xml define `<dropwizard.version.bundle>0.x</dropwizard-version-bundle.version>`
+
+Make sure to keep `dropwizard-version-bundle.version in sync` with the major dropwizard version (0.6, 0.7, 0.8)
+
+Dropwizad 0.6 aplication example :
+
 ```xml
+
+<dropwizard-version-bundle.version>0.6</dropwizard-version-bundle.version>
+
+...
+
 <dependency>
-  <groupId>io.dropwizard-bundles</groupId>
+  <groupId>fr.novapost.dropwizard-bundles</groupId>
   <artifactId>dropwizard-version-bundle</artifactId>
-  <version>0.8.1-2</version>
+  <version>${dropwizard-version-bundle.version}</version>
 </dependency>
 ```
+
 
 Add the bundle to your environment using your choice of version supplier:
 
@@ -36,16 +48,15 @@ public class MyApplication extends Application<Configuration> {
 }
 ```
 
-Now you can access the the `/version` URL on the admin port of your application to see the version
+Now you can access the the `/version` URL of your application to see the version
 of your application as well as its dependencies.
 
 For example if your application were running on `localhost` with the admin server on port 8081 then
 something like the following would show you your application's version.
 
 ```bash
-curl localhost:8081/version
+curl localhost:8080/version
 ```
-
 
 ## Customizing the version supplier
 
