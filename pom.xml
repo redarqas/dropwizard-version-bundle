@@ -10,9 +10,25 @@
 
   <groupId>fr.novapost.dropwizard-bundles</groupId>
   <artifactId>dropwizard-version-bundle</artifactId>
-  <!-- Make sure to keep this in sync with the dropwizard version below. -->
-  <version>0.6.2-1-SNAPSHOT</version>
+  <!-- Make sure to keep this in sync with the major dropwizard version below. -->
+  <version>0.6</version>
   <packaging>jar</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>nova</id>
+            <url>http://nibbler:9081/nexus/content/repositories/nova</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://nibbler:9081/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>nibbler</id>
+            <name>nibbler_site</name>
+            <url>scp://nibbler/var/novapost/www/mvn-site/</url>
+        </site>
+    </distributionManagement>
 
   <name>dropwizard-version-bundle</name>
   <description>Dropwizard bundle that easily exposes the version of your application.</description>
@@ -26,9 +42,9 @@
   </licenses>
 
   <scm>
-    <url>http://github.com/dropwizard-bundles/dropwizard-version-bundle</url>
-    <connection>scm:git:git@github.com:dropwizard-bundles/dropwizard-version-bundle.git</connection>
-    <developerConnection>scm:git:git@github.com:dropwizard-bundles/dropwizard-version-bundle.git</developerConnection>
+    <url>http://github.com/redarqas/dropwizard-version-bundle</url>
+    <connection>scm:git:git@github.com:redarqas/dropwizard-version-bundle.git</connection>
+    <developerConnection>scm:git:git@github.com:redarqas/dropwizard-version-bundle.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -73,37 +89,6 @@
 
         </configuration>
       </plugin>
-      <!--
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>2.14</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>6.4.1</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <configuration>
-              <configLocation>checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <violationSeverity>warning</violationSeverity>
-              <failOnViolation>true</failOnViolation>
-              <failsOnError>true</failsOnError>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      -->
       <!-- Release tags should be v<VERSION>. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
