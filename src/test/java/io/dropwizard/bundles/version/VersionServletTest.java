@@ -29,7 +29,7 @@ public class VersionServletTest {
 
   @Before
   public void setup() throws Exception {
-    tester.addServlet(new ServletHolder(new VersionServlet(supplier, OBJECT_MAPPER)), PATH);
+    tester.addServlet(new ServletHolder(new VersionServlet(supplier, OBJECT_MAPPER, true)), PATH);
     tester.start();
   }
 
@@ -46,7 +46,7 @@ public class VersionServletTest {
     assertEquals(200, response.getStatus());
 
     JsonNode root = fromJson(response.getContent());
-    assertEquals("version", root.get("application").textValue());
+    assertEquals("version", root.get("version").textValue());
   }
 
   @Test
@@ -57,7 +57,7 @@ public class VersionServletTest {
     assertEquals(200, response.getStatus());
 
     JsonNode root = fromJson(response.getContent());
-    assertNull(root.get("application").textValue());
+    assertNull(root.get("version").textValue());
   }
 
   @Test
