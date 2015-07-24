@@ -11,7 +11,7 @@
   <groupId>fr.novapost.dropwizard-bundles</groupId>
   <artifactId>dropwizard-version-bundle</artifactId>
   <!-- Make sure to keep this in sync with the major dropwizard version below. -->
-  <version>0.7</version>
+  <version>0.8</version>
   <packaging>jar</packaging>
 
     <distributionManagement>
@@ -70,7 +70,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-    <dropwizard.version>0.7.1</dropwizard.version>
+    <dropwizard.version>0.8.2</dropwizard.version>
     <junit.version>4.12</junit.version>
     <mockito.version>1.9.5</mockito.version>
     <reflections.version>0.9.10</reflections.version>
